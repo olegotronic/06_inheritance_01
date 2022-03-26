@@ -1,0 +1,68 @@
+package attachment
+
+data class Post(
+    val id: Int = 0,
+    val ownerId: Int = 0,
+    val fromId: Int = 0,
+    val createdBy: Int = 0,
+    val date: Int = 0,
+    val text: String = "",
+    val replyOwnerId: Int? = null,
+    val replyPostId: Int? = null,
+    val friendsOnly: Boolean = false,
+    val comments: Array<Comment>? = null,
+    val copyright: Copyright? = null,
+    val likes: Array<Like>? = null,
+    val reposts: Array<Repost>? = null,
+    val views: Array<View>? = null,
+    val postType: String = "",
+    val signerId: Int = 0,
+    val canPin: Boolean = false,
+    val canDelete: Boolean = false,
+    val canEdit: Boolean = false,
+    val isPinned: Boolean = false,
+    val markedAsAds: Boolean = false,
+    val isFavorite: Boolean = false,
+    val donut: Donut? = null,
+    val postponedId: Int = 0,
+    var attachments: Array<Attachment>? = null,
+)
+
+data class Comment(
+    val count: Int = 0,
+    val canPost: Boolean = false,
+    val groupsCanPost: Boolean = false,
+    val canClose: Boolean = false,
+    val canOpen: Boolean = false,
+)
+
+data class Copyright(
+    val id: Int = 0,
+    val link: String = "",
+    val name: String = "",
+    val type: String = "",
+)
+
+data class Like(
+    val count: Int = 0,
+    val userLikes: Boolean = false,
+    val canLike: Boolean = false,
+    val canPublish: Boolean = false,
+)
+
+data class Repost(
+    val count: Int = 0,
+    val userReposted: Boolean = false,
+)
+
+data class View(
+    val count: Int = 0,
+)
+
+data class Donut(
+    val isDonut: Boolean = false,
+    val paidDuration: Int = 0,
+    val placeholder: String = "",
+    val canPublishFreeCopy: Boolean = false,
+    val editMode: String = "",
+)
