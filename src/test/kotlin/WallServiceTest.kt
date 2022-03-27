@@ -67,4 +67,39 @@ class WallServiceTest {
         assertFalse(result)
 
     }
+
+    @Test
+    fun createComment_ExistingId() {
+
+        // arrange
+        val wallService = WallService()
+        val post = wallService.add(Post(text = "First post"))
+
+        val postId = post.id
+
+        // act
+        wallService.createComment(Comment(replyToPost = postId, text = "First comment"))
+
+        // assert
+        assertTrue(true)
+
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun createComment_NotExistingId() {
+
+        // arrange
+        val wallService = WallService()
+        val post = wallService.add(Post(text = "First post"))
+
+        val postId = post.id + 1
+
+        // act
+        wallService.createComment(Comment(replyToPost = postId, text = "First comment"))
+
+        // assert
+        assertTrue(false)
+
+    }
+
 }

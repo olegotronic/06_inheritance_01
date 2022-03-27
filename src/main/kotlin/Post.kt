@@ -29,11 +29,17 @@ data class Post(
 )
 
 data class Comment(
-    val count: Int = 0,
-    val canPost: Boolean = false,
-    val groupsCanPost: Boolean = false,
-    val canClose: Boolean = false,
-    val canOpen: Boolean = false,
+    val id: Int = 0,
+    val fromId: Int = 0,
+    val date: Int = 0,
+    val text: String = "",
+    val donut: Donut? = null,
+    val replyToUser: Int? = null,
+    val replyToComment: Int? = null,
+    val replyToPost: Int? = null,
+    var attachments: Array<Attachment>? = null,
+    var parentsStack: Array<Comment>? = null,
+    val thread: Any? = null,
 )
 
 data class Copyright(
