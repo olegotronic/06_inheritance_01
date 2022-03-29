@@ -72,3 +72,9 @@ data class Donut(
     val canPublishFreeCopy: Boolean = false,
     val editMode: String = "",
 )
+
+data class Report(
+    val commentId: Int,
+    val reason: UInt,
+)
+
