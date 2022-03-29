@@ -67,4 +67,96 @@ class WallServiceTest {
         assertFalse(result)
 
     }
+
+    @Test
+    fun createComment_ExistingId() {
+
+        // arrange
+        val wallService = WallService()
+        val post = wallService.add(Post(text = "First post"))
+
+        val postId = post.id
+
+        // act
+        wallService.createComment(Comment(replyToPost = postId, text = "First comment"))
+
+        // assert
+        assertTrue(true)
+
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun createComment_NotExistingId() {
+
+        // arrange
+        val wallService = WallService()
+        val post = wallService.add(Post(text = "First post"))
+
+        val postId = post.id + 1
+
+        // act
+        wallService.createComment(Comment(replyToPost = postId, text = "First comment"))
+
+        // assert
+        assertTrue(false)
+
+    }
+
+    @Test
+    fun createReport_ExistingCommentId() {
+
+        // arrange
+        val wallService = WallService()
+        val post = wallService.add(Post(text = "First post"))
+        val postId = post.id
+
+        val comment = wallService.createComment(Comment(replyToPost = postId, text = "First comment"))
+        val commentId = comment.id
+
+        // act
+        wallService.reportComment(commentId = commentId, reason = 0U)
+
+        // assert
+        assertTrue(true)
+
+    }
+
+    @Test(expected = CommentNotFoundException::class)
+    fun createReport_NotExistingCommentId() {
+
+        // arrange
+        val wallService = WallService()
+        val post = wallService.add(Post(text = "First post"))
+        val postId = post.id
+
+        val comment = wallService.createComment(Comment(replyToPost = postId, text = "First comment"))
+        val commentId = comment.id + 1
+
+        // act
+        wallService.reportComment(commentId = commentId, reason = 0U)
+
+        // assert
+        assertTrue(true)
+
+    }
+
+    @Test(expected = IncorrectReasonException::class)
+    fun createReport_IncorrectReason() {
+
+        // arrange
+        val wallService = WallService()
+        val post = wallService.add(Post(text = "First post"))
+        val postId = post.id
+
+        val comment = wallService.createComment(Comment(replyToPost = postId, text = "First comment"))
+        val commentId = comment.id
+
+        // act
+        wallService.reportComment(commentId = commentId, reason = 9U)
+
+        // assert
+        assertTrue(true)
+
+    }
+
 }
